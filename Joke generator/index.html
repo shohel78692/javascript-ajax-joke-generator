@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-compatible" content="ie-edge">
+	<title>Shaikh jokes</title>
+	<style>
+		.container{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			text-align: center;
+		}
+		.container h1{
+			font-family: fantasy;
+		}
+		.container button{
+			background-color: #3f5185;
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			outline: none;
+			font-family: cursive;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+  <div class="container">
+  	<h1 id="jokeheading"></h1>
+  	<img id="jokeImage" src="j.png" alt="">
+  	<button>Get new joke</button>
+  </div>
+
+  <script type="text/javascript">
+  	let btn = document.querySelector("button");
+  	let jokeheading = document.querySelector("#jokeheading");
+  	let jokeImage = document.querySelector("#jokeImage");
+
+  	btn.addEventListener("click", getData);
+
+  	function getData() {
+       let ajax = new XMLHttpRequest();
+
+       ajax.open("GET", 'https://api.chucknorris.io/jokes/random',true);
+       ajax.onload = function() {
+       	if(this.status === 200) {
+       		let value = JSON.parse(this.responseText);
+       		jokeheading.innerHTML = value.value;
+       		jokeImage.src = icon_src;
+       	}
+       };
+       ajax.send();
+  	}
+
+  </script>
+</body>
+</html>
